@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="pointcp/|postal/|threads/|simplechat1/" kind="src" path=""/>
+	<classpathentry kind="src" path="pointcp"/>
+	<classpathentry kind="src" path="postal"/>
+	<classpathentry kind="src" path="simplechat1"/>
+	<classpathentry kind="src" path="threads"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
