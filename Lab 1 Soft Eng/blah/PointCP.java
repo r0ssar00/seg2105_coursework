@@ -10,7 +10,7 @@ package blah;
 * This class contains instances of coordinates in either polar or
 * cartesian format.  It also provides the utilities to convert
 * them into the other type. It is not an optimal design, it is used
-* only to illustrate some design issues.
+* only to illustrate some design issues. Hello World.
 *
 * @author Fran&ccedil;ois B&eacute;langer
 * @author Dr Timothy C. Lethbridge
