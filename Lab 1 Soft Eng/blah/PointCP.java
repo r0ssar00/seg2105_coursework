@@ -8,6 +8,7 @@ package blah;
 * This class contains instances of coordinates in either polar or
 * cartesian format.  It also provides the utilities to convert
 * them into the other type. It is not an optimal design, it is used
+* another line
 * only to illustrate some design issues.
 *
 * @author Fran&ccedil;ois B&eacute;langer
