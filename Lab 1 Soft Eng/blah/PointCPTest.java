@@ -36,14 +36,15 @@ public class PointCPTest
 public static void main(String[] args)
 {
  PointCP point;
-
+ PointCP cpoint;
  System.out.println("Cartesian-Polar Coordinates Conversion Program");
-
  // Check if the user input coordinates from the command line
  // If he did, create the PointCP object from these arguments.
  // If he did not, prompt the user for them.
  try
  {
+   cpoint = new CartesianCoordinates(Double.valueOf(args[1]).doubleValue(),
+   									 Double.valueOf(args[2]).doubleValue());
    point = new PointCP(args[0].toUpperCase().charAt(0), 
      Double.valueOf(args[1]).doubleValue(), 
      Double.valueOf(args[2]).doubleValue());
@@ -58,6 +59,7 @@ public static void main(String[] args)
    try
    {
      point = getInput();
+     cpoint = getInput();
    }
    catch(IOException ex)
    {
@@ -70,6 +72,13 @@ public static void main(String[] args)
  System.out.println("\nAfter asking to store as Cartesian:\n" + point);
  point.convertStorageToPolar();
  System.out.println("\nAfter asking to store as Polar:\n" + point);
+ 
+ System.out.println("\nYou entered:\n" + cpoint);
+ cpoint.convertStorageToCartesian();
+ System.out.println("\nAfter asking to store as Cartesian:\n" + cpoint);
+ cpoint.convertStorageToPolar();
+ System.out.println("\nAfter asking to store as Polar:\n" + cpoint);
+ 
 }
 
 /**
