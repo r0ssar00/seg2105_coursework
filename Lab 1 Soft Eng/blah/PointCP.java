@@ -18,7 +18,6 @@ package blah;
 public class PointCP
 {
 //Instance variables ************************************************
-
 /**
 * Contains C(artesian) or P(olar) to identify the type of
 * coordinates that are being dealt with.
