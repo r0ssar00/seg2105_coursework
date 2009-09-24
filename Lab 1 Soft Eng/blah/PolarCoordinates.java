@@ -1,14 +1,15 @@
 package blah;
 public class PolarCoordinates extends AbstractPoint {
 	public PolarCoordinates(double Rho, double Theta) {
-		super(blah.AbstractClass.POLAR, Rho, Theta);
+		super(AbstractPoint.POLAR, Rho, Theta);
 	}
 	
-	public abstract double getDistance(AbstractPoint pointB)
+	public double getDistance(AbstractPoint pointB)
 	{
+		return 1;
 	}
 	
-	public abstract AbstractPoint rotatePoint(double rotation)
+	public AbstractPoint rotatePoint(double rotation)
 	{
 		return new PolarCoordinates(xOrRho, ((yOrTheta+rotation) % 360));
 	}

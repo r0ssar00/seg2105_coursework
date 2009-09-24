@@ -43,7 +43,7 @@ public static void main(String[] args)
  // If he did not, prompt the user for them.
  try
  {
-   cpoint = new CartesianCoordinates(Double.valueOf(args[1]).doubleValue(),
+	 AbstractPoint AP = new CartesianCoordinates(Double.valueOf(args[1]).doubleValue(),
    									 Double.valueOf(args[2]).doubleValue());
    point = new PointCP(args[0].toUpperCase().charAt(0), 
      Double.valueOf(args[1]).doubleValue(), 
@@ -73,11 +73,11 @@ public static void main(String[] args)
  point.convertStorageToPolar();
  System.out.println("\nAfter asking to store as Polar:\n" + point);
  
- System.out.println("\nYou entered:\n" + cpoint);
- cpoint.convertStorageToCartesian();
- System.out.println("\nAfter asking to store as Cartesian:\n" + cpoint);
- cpoint.convertStorageToPolar();
- System.out.println("\nAfter asking to store as Polar:\n" + cpoint);
+ System.out.println("\nYou entered:\n" + AP);
+ AP.convertStorageToCartesian();
+ System.out.println("\nAfter asking to store as Cartesian:\n" + AP);
+ AP.convertStorageToPolar();
+ System.out.println("\nAfter asking to store as Polar:\n" + AP);
  
 }
 

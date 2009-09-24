@@ -1,11 +1,13 @@
+package blah;
+
 abstract class AbstractPoint
 {
 	public static final int CARTESIAN = 0;
 	public static final int POLAR = 1;
 	int typeCoord;
-	int xOrRho;
-	int yOrTheta;
-	public AbstractPoint(int typeCoord, int xOrRho, int yOrTheta)
+	double xOrRho;
+	double yOrTheta;
+	public AbstractPoint(int typeCoord, double xOrRho, double yOrTheta)
 	{
 		if (typeCoord != blah.AbstractPoint.CARTESIAN || typeCoord != blah.AbstractPoint.POLAR)
 			throw new IllegalArgumentException();

@@ -4,12 +4,15 @@ public class CartesianCoordinates extends AbstractPoint {
 		super(blah.AbstractPoint.CARTESIAN, X, Y);
 	}
 	
-	public abstract double getDistance(AbstractPoint pointB)
+	public double getDistance(AbstractPoint pointB)
 	{
+		return 1;
 	}
 	
-	public abstract AbstractPoint rotatePoint(double rotation)
+	public AbstractPoint rotatePoint(double rotation)
 	{
+		CartesianCoordinates q = new CartesianCoordinates(2, 3);
+		return q;
 	}
 	
 	public String toString()
