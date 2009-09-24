@@ -4,11 +4,6 @@ public class PolarCoordinates extends AbstractPoint {
 		super(AbstractPoint.POLAR, Rho, Theta);
 	}
 	
-	public double getDistance(AbstractPoint pointB)
-	{
-		return 1;
-	}
-	
 	public AbstractPoint rotatePoint(double rotation)
 	{
 		return new PolarCoordinates(xOrRho, ((yOrTheta+rotation) % 360));

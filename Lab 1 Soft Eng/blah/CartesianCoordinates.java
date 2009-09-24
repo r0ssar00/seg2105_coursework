@@ -4,15 +4,14 @@ public class CartesianCoordinates extends AbstractPoint {
 		super(blah.AbstractPoint.CARTESIAN, X, Y);
 	}
 	
-	public double getDistance(AbstractPoint pointB)
-	{
-		return 1;
-	}
-	
 	public AbstractPoint rotatePoint(double rotation)
 	{
-		CartesianCoordinates q = new CartesianCoordinates(2, 3);
-		return q;
+		double radRotation = Math.toRadians(rotation);
+		double X = getX();
+		double Y = getY();
+     
+		return new PointCP('C',(Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
+							(Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
 	}
 	
 	public String toString()
