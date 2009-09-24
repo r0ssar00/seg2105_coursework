@@ -1,7 +1,7 @@
 package blah;
-public class CartesianCoordinates extends PointCP {
-	public CartesianCoordinates(double X, double Y) {
-		super(blah.AbstractPoint.CARTESIAN, X, Y);
+public class PolarCoordinates extends PointCP {
+	public PolarCoordinates(double X, double Y) {
+		super(blah.AbstractClass.POLAR, X, Y);
 	}
 	
 	public String toString()
