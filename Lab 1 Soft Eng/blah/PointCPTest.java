@@ -74,11 +74,11 @@ public static void main(String[] args)
  point.convertStorageToPolar();
  System.out.println("\nAfter asking to store as Polar:\n" + point);
  
- System.out.println("\nYou entered:\n" + AP);
- AP.convertStorageToCartesian();
- System.out.println("\nAfter asking to store as Cartesian:\n" + AP);
- AP.convertStorageToPolar();
- System.out.println("\nAfter asking to store as Polar:\n" + AP);
+ System.out.println("\nYou entered:\n" + cpoint);
+ cpoint.convertStorageToCartesian();
+ System.out.println("\nAfter asking to store as Cartesian:\n" + cpoint);
+ cpoint.convertStorageToPolar();
+ System.out.println("\nAfter asking to store as Polar:\n" + cpoint);
  
 }
 
