@@ -36,7 +36,6 @@ public class PointCPTest
 public static void main(String[] args)
 {
  PointCP point;
- PointCP cpoint;
  AbstractPoint AP;
  System.out.println("Cartesian-Polar Coordinates Conversion Program");
  // Check if the user input coordinates from the command line
@@ -56,11 +55,10 @@ public static void main(String[] args)
    // command line arguments, or they were invalid
    if(args.length != 0)
      System.out.println("Invalid arguments on command line");
-
+	AP = null;
    try
    {
      point = getInput();
-     cpoint = getInput();
    }
    catch(IOException ex)
    {
@@ -74,12 +72,11 @@ public static void main(String[] args)
  point.convertStorageToPolar();
  System.out.println("\nAfter asking to store as Polar:\n" + point);
  
- System.out.println("\nYou entered:\n" + cpoint);
- cpoint.convertStorageToCartesian();
- System.out.println("\nAfter asking to store as Cartesian:\n" + cpoint);
- cpoint.convertStorageToPolar();
- System.out.println("\nAfter asking to store as Polar:\n" + cpoint);
- 
+ try {
+ 	System.out.println("\nYou entered:\n" + AP);
+ } catch (Exception e) {
+ 	System.out.println("error, no command line args!");
+ }
 }
 
 /**
