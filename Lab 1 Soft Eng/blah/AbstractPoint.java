@@ -1,6 +1,6 @@
 package blah;
 
-abstract class AbstractPoint
+public abstract class AbstractPoint
 {
 	public static final int CARTESIAN = 0;
 	public static final int POLAR = 1;

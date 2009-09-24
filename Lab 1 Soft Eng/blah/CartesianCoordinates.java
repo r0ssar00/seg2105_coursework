@@ -10,7 +10,7 @@ public class CartesianCoordinates extends AbstractPoint {
 		double X = getX();
 		double Y = getY();
      
-		return new PointCP('C',(Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
+		return new CartesianCoordinates((Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
 							(Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
 	}
 	
