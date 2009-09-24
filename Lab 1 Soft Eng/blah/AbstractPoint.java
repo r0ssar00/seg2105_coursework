@@ -7,7 +7,7 @@ abstract class AbstractPoint
 	int yOrTheta;
 	public AbstractPoint(int typeCoord, int xOrRho, int yOrTheta)
 	{
-		if (typeCoord != AbstractPoint.CARTESIAN || typeCoord != AbstractPoint.POLAR)
+		if (typeCoord != blah.AbstractPoint.CARTESIAN || typeCoord != blah.AbstractPoint.POLAR)
 			throw new IllegalArgumentException();
 		this.typeCoord = typeCoord;
 		this.xOrRho = xOrRho;
@@ -15,7 +15,7 @@ abstract class AbstractPoint
 	}
 	public double getX()
 	{
-		if(typeCoord == AbstractPoint.CARTESIAN) 
+		if(typeCoord == blah.AbstractPoint.CARTESIAN) 
 			return xOrRho;
 		else 
 			return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
@@ -23,7 +23,7 @@ abstract class AbstractPoint
 	
 	public double getY()
 	{
-		if(typeCoord == AbstractPoint.CARTESIAN) 
+		if(typeCoord == blah.AbstractPoint.CARTESIAN) 
 			return yOrTheta;
 		else 
 			return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
@@ -31,7 +31,7 @@ abstract class AbstractPoint
 
 	public double getRho()
 	{
-		if(typeCoord == AbstractPoint.POLAR) 
+		if(typeCoord == blah.AbstractPoint.POLAR) 
 			return xOrRho;
 		else 
 			return (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
@@ -39,23 +39,23 @@ abstract class AbstractPoint
 
 	public double getTheta()
 	{
-		if(typeCoord == AbstractPoint.POLAR)
+		if(typeCoord == blah.AbstractPoint.POLAR)
 			return yOrTheta;
 		else 
 			return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
 	}
 	
-	public abstract double getDistance(AbstractPoint pointB);
-	
-	public AbstractPoint rotatePoint(double rotation)
+	public double getDistance(PointCP pointB)
 	{
-		double radRotation = Math.toRadians(rotation);
-		double X = getX();
-		double Y = getY();
-	     
-		return new AbstractPoint(AbstractPoint.CARTESIAN,(Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
-		(Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
+		// Obtain differences in X and Y, sign is not important as these values
+		// will be squared later.
+		double deltaX = getX() - pointB.getX();
+		double deltaY = getY() - pointB.getY();
+	 
+		return Math.sqrt((Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
 	}
+	
+	public abstract AbstractPoint rotatePoint(double rotation);
 	
 	public abstract String toString();
 }
