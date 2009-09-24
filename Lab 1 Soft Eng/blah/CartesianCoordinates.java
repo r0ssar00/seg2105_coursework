@@ -5,4 +5,9 @@ public class CartesianCoordinates extends PointCP {
 	}
 	public void convertStorageToPolar() {}
 	public void convertStorageToCartesian() {}
+	
+	public String toString()
+	{
+		return "Stored as Cartesian" + getX() + "," + getY() + "/n Converted to Polar ["  + getRho() + " , " + getTheta() + "]";
+	}
 }
