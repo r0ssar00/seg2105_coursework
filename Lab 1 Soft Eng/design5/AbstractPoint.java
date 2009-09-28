@@ -4,12 +4,12 @@ public abstract class AbstractPoint
 {
 	public static final int CARTESIAN = 0;
 	public static final int POLAR = 1;
-	char typeCoord;
+	int typeCoord;
 	double xOrRho;
 	double yOrTheta;
-	public AbstractPoint(char typeCoord, double xOrRho, double yOrTheta)
+	public AbstractPoint(int typeCoord, double xOrRho, double yOrTheta)
 	{
-		if (typeCoord != design5.AbstractPoint.CARTESIAN || typeCoord != design5.AbstractPoint.POLAR)
+		if (typeCoord != design5.AbstractPoint.CARTESIAN && typeCoord != design5.AbstractPoint.POLAR)
 			throw new IllegalArgumentException();
 		this.typeCoord = typeCoord;
 		this.xOrRho = xOrRho;

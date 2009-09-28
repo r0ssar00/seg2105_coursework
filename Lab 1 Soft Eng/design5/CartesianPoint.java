@@ -3,7 +3,7 @@ public class CartesianPoint extends AbstractPoint
 {
 	public CartesianPoint(double X, double Y) 
 	{
-		super('C', X, Y);
+		super(AbstractPoint.CARTESIAN, X, Y);
 	}
 	
 	public void convertStorageToPolar() {}

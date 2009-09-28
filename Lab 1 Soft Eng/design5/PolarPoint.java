@@ -3,7 +3,7 @@ public class PolarPoint extends AbstractPoint
 {
 	public PolarPoint(double Rho, double Theta) 
 	{
-		super('P', Rho, Theta);
+		super(AbstractPoint.POLAR, Rho, Theta);
 	}
 	
 	public void convertStorageToPolar() {}

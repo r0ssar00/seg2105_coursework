@@ -42,17 +42,19 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-    	if (args[0].toUpperCase().charAt(0) == 'C')
-    		point = new CartesianPoint(Double.valueOf(args[1]).doubleValue(), 
-    									Double.valueOf(args[2]).doubleValue());
-        else if (args[0].toUpperCase().charAt(0) == 'P')
-        	point = new PolarPoint(Double.valueOf(args[1]).doubleValue(), 
-        							Double.valueOf(args[2]).doubleValue());
+    	char arg0 = args[0].toUpperCase().charAt(0);
+    	double arg1 = Double.valueOf(args[1]).doubleValue();
+    	double arg2 = Double.valueOf(args[2]).doubleValue();
+    	if (arg0 == 'C')
+    		point = new CartesianPoint(arg1, arg2);
+        else if (arg0 == 'P')
+        	point = new PolarPoint(arg1, arg2);
         else
         	point = null;
     }
     catch(Exception e)
     {
+    	e.printStackTrace();
       // If we arrive here, it is because either there were no
       // command line arguments, or they were invalid
       if(args.length != 0)
