@@ -8,7 +8,7 @@ public abstract class AbstractPoint
 	private double xOrRho, yOrTheta;
 	public AbstractPoint(int typeCoord, double xOrRho, double yOrTheta)
 	{
-		if (typeCoord != design3.AbstractPoint.CARTESIAN || typeCoord != design3.AbstractPoint.POLAR)
+		if (typeCoord != design4.AbstractPoint.CARTESIAN || typeCoord != design4.AbstractPoint.POLAR)
 			throw new IllegalArgumentException();
 		this.typeCoord = typeCoord;
 		this.xOrRho = xOrRho;
@@ -16,7 +16,7 @@ public abstract class AbstractPoint
 	}
 	public double getX()
 	{
-		if(typeCoord == design3.AbstractPoint.CARTESIAN) 
+		if(typeCoord == design4.AbstractPoint.CARTESIAN) 
 			return xOrRho;
 		else 
 			return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
@@ -24,7 +24,7 @@ public abstract class AbstractPoint
 	
 	public double getY()
 	{
-		if(typeCoord == design3.AbstractPoint.CARTESIAN) 
+		if(typeCoord == design4.AbstractPoint.CARTESIAN) 
 			return yOrTheta;
 		else 
 			return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
@@ -32,7 +32,7 @@ public abstract class AbstractPoint
 
 	public double getRho()
 	{
-		if(typeCoord == design3.AbstractPoint.POLAR) 
+		if(typeCoord == design4.AbstractPoint.POLAR) 
 			return xOrRho;
 		else 
 			return (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
@@ -40,7 +40,7 @@ public abstract class AbstractPoint
 
 	public double getTheta()
 	{
-		if(typeCoord == design3.AbstractPoint.POLAR)
+		if(typeCoord == design4.AbstractPoint.POLAR)
 			return yOrTheta;
 		else 
 			return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
