@@ -31,7 +31,7 @@ public class PointCPTest
    * @param args[1] The value of X or RHO.
    * @param args[2] The value of Y or THETA.
    */
-   private void printf(String s) {
+   private void mprintf(String s) {
    	System.out.println(s);
    }
   public static void main(String[] args)
@@ -51,23 +51,23 @@ public class PointCPTest
     	double arg2 = Double.valueOf(args[2]).doubleValue();
     	if (arg0 == AbstractPoint.CARTESIAN)
     	{
-    		printf("CART");
+    		mprintf("CART");
     		point = new CartesianPoint(arg1, arg2);
-    		printf("CSETI");
+    		mprintf("CSETI");
     		setInput(point, point2);
     	}
     	else if (arg0 == AbstractPoint.POLAR)
     	{
-    		printf("POL");
+    		mprintf("POL");
         	point = new PolarPoint(arg1, arg2);
-    		printf("PSETI");
+    		mprintf("PSETI");
     		setInput(point, point2);
     	}
         else 
         {
-        	printf("NEI");
+        	mprintf("NEI");
         	point = getInput();
-        	point2 = getInput();
+        	mpoint2 = getInput();
         }
     }
     catch(Exception e)
