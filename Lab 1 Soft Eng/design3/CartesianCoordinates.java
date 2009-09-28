@@ -1,21 +1,12 @@
 package design3;
 public class CartesianCoordinates extends design3.PointCP {
-	public CartesianCoordinates(double X, double Y) {
-		super('C', X, Y);
-	}
-	
-	public AbstractPoint rotatePoint(double rotation)
-	{
-		double radRotation = Math.toRadians(rotation);
-		double X = getX();
-		double Y = getY();
-     
-		return new CartesianCoordinates((Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
-							(Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
-	}
-	
-	public String toString()
-	{
-		return "Stored as Cartesian" + getX() + "," + getY() + "/n Converted to Polar ["  + getRho() + " , " + getTheta() + "]";
-	}
+    public CartesianCoordinates(double X, double Y) 
+    {
+        super('C', X, Y);
+    }
+    
+    public String toString()
+    {
+        return "Stored as Cartesian" + getX() + "," + getY() + "/n Converted to Polar ["  + getRho() + " , " + getTheta() + "]";
+    }
 }
