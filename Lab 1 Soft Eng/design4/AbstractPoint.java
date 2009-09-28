@@ -5,8 +5,7 @@ public abstract class AbstractPoint
 	public static final int CARTESIAN = 0;
 	public static final int POLAR = 1;
 	int typeCoord;
-	double xOrRho;
-	double yOrTheta;
+	private double xOrRho, yOrTheta;
 	public AbstractPoint(int typeCoord, double xOrRho, double yOrTheta)
 	{
 		if (typeCoord != design3.AbstractPoint.CARTESIAN || typeCoord != design3.AbstractPoint.POLAR)

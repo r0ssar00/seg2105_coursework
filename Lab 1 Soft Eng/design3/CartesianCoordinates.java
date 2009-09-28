@@ -1,5 +1,5 @@
 package design3;
-public class CartesianCoordinates extends AbstractPoint {
+public class CartesianCoordinates extends design3.PointCP {
 	public CartesianCoordinates(double X, double Y) {
 		super(design3.AbstractPoint.CARTESIAN, X, Y);
 	}
