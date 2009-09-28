@@ -34,7 +34,8 @@ public class PointCPTest
   public static void main(String[] args)
   {
 	  AbstractPoint point;
-
+	  AbstractPoint point2 = null;
+	  
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
     // Check if the user input coordinates from the command line
@@ -42,19 +43,26 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-    	char arg0 = args[0].toUpperCase().charAt(0);
+    	int arg0 = Integer.valueOf(args[0]);
     	double arg1 = Double.valueOf(args[1]).doubleValue();
     	double arg2 = Double.valueOf(args[2]).doubleValue();
-    	if (arg0 == 'C')
+    	if (arg0 == 0)
+    	{
     		point = new CartesianPoint(arg1, arg2);
-        else if (arg0 == 'P')
+    		point2 = new PolarPoint(point.getRho(), point.getTheta());
+    	}
+    	else if (arg0 == 1)
+    	{
         	point = new PolarPoint(arg1, arg2);
+        	point2 = new CartesianPoint(point.getX(), point.getY());
+    	}
         else
-        	point = null;
+        	point = getInput();
+    		setInput(point, point2);
     }
     catch(Exception e)
     {
-    	e.printStackTrace();
+      // This isn't really needed: e.printStackTrace();
       // If we arrive here, it is because either there were no
       // command line arguments, or they were invalid
       if(args.length != 0)
@@ -63,6 +71,7 @@ public class PointCPTest
       try
       {
         point = getInput();
+        setInput(point, point2);
       }
       catch(IOException ex)
       {
@@ -71,10 +80,9 @@ public class PointCPTest
       }
     }
     System.out.println("\nYou entered:\n" + point);
-    point.convertStorageToCartesian();
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
-    System.out.println("\nAfter asking to store as Polar:\n" + point);
+    System.out.println("\nAfter asking to store as Polar:\n" + point2);
   }
 
   /**
@@ -165,4 +173,13 @@ public class PointCPTest
     else
     	return (new PolarPoint(a, b));
   }
+  private static AbstractPoint setInput(AbstractPoint point, AbstractPoint point2) throws IOException
+  {
+	  if (point.typeCoord == 0)
+		  point2 = new PolarPoint(point.getRho(), point.getTheta());
+	  else
+		  point2 = new CartesianPoint(point.getX(), point.getY());
+	  return point2;
+  }
+  
 }
