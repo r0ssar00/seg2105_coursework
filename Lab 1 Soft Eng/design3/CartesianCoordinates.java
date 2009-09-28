@@ -11,6 +11,6 @@ public class CartesianCoordinates extends design3.PointCP {
     
     public String toString()
     {
-        return "Stored as Cartesian" + getX() + "," + getY() + "/n Converted to Polar ["  + getRho() + " , " + getTheta() + "]";
+        return "Stored as Cartesian " + getX() + "," + getY() + "\n Converted to Polar ["  + getRho() + " , " + getTheta() + "]";
     }
 }

@@ -16,6 +16,6 @@ public class PolarPoint extends AbstractPoint
 	
 	public String toString()
 	{
-		return "Stored as Polar" + getRho() + "," + getTheta() + "/n Converted to Cartesian ["  + getX() + " , " + getY() + "]";
+		return "Stored as Polar " + getRho() + "," + getTheta() + "\n Converted to Cartesian ["  + getX() + " , " + getY() + "]";
 	}
 }
