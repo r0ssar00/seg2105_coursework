@@ -1,7 +1,9 @@
 package design5;
-public class PolarCoordinates extends AbstractPoint {
-	public PolarCoordinates(double Rho, double Theta) {
-		super(AbstractPoint.POLAR, Rho, Theta);
+public class PolarCoordinates extends AbstractPoint 
+{
+	public PolarCoordinates(double Rho, double Theta) 
+	{
+		super('P', Rho, Theta);
 	}
 	
 	public AbstractPoint rotatePoint(double rotation)

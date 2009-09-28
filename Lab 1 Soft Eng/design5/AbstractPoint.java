@@ -4,10 +4,10 @@ public abstract class AbstractPoint
 {
 	public static final int CARTESIAN = 0;
 	public static final int POLAR = 1;
-	int typeCoord;
+	char typeCoord;
 	double xOrRho;
 	double yOrTheta;
-	public AbstractPoint(int typeCoord, double xOrRho, double yOrTheta)
+	public AbstractPoint(char typeCoord, double xOrRho, double yOrTheta)
 	{
 		if (typeCoord != design5.AbstractPoint.CARTESIAN || typeCoord != design5.AbstractPoint.POLAR)
 			throw new IllegalArgumentException();
@@ -47,7 +47,7 @@ public abstract class AbstractPoint
 			return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
 	}
 	
-	public double getDistance(PointCP pointB)
+	public double getDistance(CartesianCoordinates pointB)
 	{
 		// Obtain differences in X and Y, sign is not important as these values
 		// will be squared later.
