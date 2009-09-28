@@ -173,6 +173,7 @@ public class PointCPTest
     else
     	return (new PolarPoint(a, b));
   }
+  
   private static void setInput(AbstractPoint point, AbstractPoint point2)
   {
 	  if (point.typeCoord == AbstractPoint.CARTESIAN)
