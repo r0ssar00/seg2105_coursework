@@ -42,9 +42,14 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-      point = new AbstractPoint(args[0].toUpperCase().charAt(0), 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
+    	if (args[0].toUpperCase().charAt(0) == 'C')
+    		point = new CartesianPoint(Double.valueOf(args[1]).doubleValue(), 
+    									Double.valueOf(args[2]).doubleValue());
+        else if (args[0].toUpperCase().charAt(0) == 'P')
+        	point = new PolarPoint(Double.valueOf(args[1]).doubleValue(), 
+        							Double.valueOf(args[2]).doubleValue());
+        else
+        	point = null;
     }
     catch(Exception e)
     {
@@ -152,7 +157,10 @@ public class PointCPTest
       //Reset flag so while loop will prompt for other arguments
       isOK = false;
     }
-    //Return a new PointCP object
-    return (new AbstractPoint(coordType, a, b));
+    //Return a new object
+    if (coordType == 'C')
+    	return (new CartesianPoint(a, b));
+    else
+    	return (new PolarPoint(a, b));
   }
 }
