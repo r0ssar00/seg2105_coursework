@@ -1,0 +1,6 @@
+Format is a PDF file for reports followed by Code
+
+1- Code for design 5 and 3 and a report
+2- modified PointCPTest Class to test design 5 and 3 (Print the output from test)
+3- a table for exercise E.26
+4- Report for E28-E30 (comparing design 4 and 5) + code for design 4

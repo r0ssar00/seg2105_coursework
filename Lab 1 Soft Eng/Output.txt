@@ -1,0 +1,39 @@
+Design 3
+
+Cartesian-Polar Coordinates Conversion Program
+Enter the value of X using a decimal point(.): 10
+Enter the value of Y using a decimal point(.): 10
+
+You entered:
+Stored as Cartesian 10.0,10.0
+ Converted to Polar [14.142135623730951 , 45.0]
+
+Design 4
+Cartesian-Polar Coordinates Conversion Program
+Enter the type of Coordinates you are inputting ((C)artesian / (P)olar): C
+Enter the value of X using a decimal point(.): 10
+Enter the value of Y using a decimal point(.): 10
+
+You entered:
+As Polar 10.0,45.0
+ As Cartesian [10.0 , 10.0]
+
+
+Design 5
+Cartesian-Polar Coordinates Conversion Program
+Enter the type of Coordinates you are inputting ((C)artesian / (P)olar): C
+Enter the value of X using a decimal point(.): 10
+Enter the value of Y using a decimal point(.): 10
+
+You entered:
+Stored as Cartesian 10.0,10.0
+ Converted to Polar [14.142135623730951 , 45.0]
+
+After asking to store as Cartesian:
+Stored as Cartesian 10.0,10.0
+ Converted to Polar [14.142135623730951 , 45.0]
+
+After asking to store as Polar:
+Stored as Polar 14.142135623730951,45.0
+ Converted to Cartesian [10.000000000000002 , 10.0]
+

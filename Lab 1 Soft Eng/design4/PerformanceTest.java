@@ -1,4 +1,4 @@
-package design5;
+package design4;
 
 public class PerformanceTest 
 {
@@ -13,8 +13,8 @@ public class PerformanceTest
 		
 		for (int i = 0; i < 16000000; i++)
 		{
-			AbstractPoint point = new CartesianPoint(arg0, arg1);
-			AbstractPoint point2 = new PolarPoint (arg0, arg1);
+			PointCP point = new ComboPoint('C', arg0, arg1);
+			PointCP point2 = new ComboPoint('P', arg0, arg1);
 			point.getRho();
 			point.getTheta();
 			point2.getX();
@@ -23,7 +23,7 @@ public class PerformanceTest
 			point2.rotatePoint(100);
 			point2.rotatePoint(100);
 			point2.rotatePoint(60);
-			point = new CartesianPoint(arg0, arg1);
+			point = new PointCP('C', arg0, arg1);
 		}
 		
 		FinalTime = System.currentTimeMillis();
