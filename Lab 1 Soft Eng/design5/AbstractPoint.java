@@ -61,7 +61,6 @@ public abstract class AbstractPoint
 	}
 	
 	/**
-<<<<<<< HEAD:Lab 1 Soft Eng/design5/AbstractPoint.java
 	* 
 	*/
 	public void convertStorageToPolar()
@@ -93,16 +92,6 @@ public abstract class AbstractPoint
 		}
 
 	}
-=======
-	* No-Op as they are both stored in the Instances we do not need to convert
-	*/
-	public void convertStorageToPolar(){}
-		
-	/**
-	* No-Op as they are both stored in the Instances we do not need to convert
-	*/
-	public void convertStorageToCartesian(){}
->>>>>>> d26818975edc25b18e81a91f138650176f21204a:Lab 1 Soft Eng/design5/AbstractPoint.java
 	
 	public abstract AbstractPoint rotatePoint(double rotation);
 	

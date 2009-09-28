@@ -31,13 +31,10 @@ public class PointCPTest
    * @param args[1] The value of X or RHO.
    * @param args[2] The value of Y or THETA.
    */
-   private void mprintf(String s) {
-   	System.out.println(s);
-   }
   public static void main(String[] args)
   {
 	  AbstractPoint point;
-	  AbstractPoint point2 = null;
+	  AbstractPoint point2;
 	  
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
@@ -51,23 +48,18 @@ public class PointCPTest
     	double arg2 = Double.valueOf(args[2]).doubleValue();
     	if (arg0 == AbstractPoint.CARTESIAN)
     	{
-    		mprintf("CART");
     		point = new CartesianPoint(arg1, arg2);
-    		mprintf("CSETI");
-    		setInput(point, point2);
+    		point2 = getOther(point);
     	}
     	else if (arg0 == AbstractPoint.POLAR)
     	{
-    		mprintf("POL");
         	point = new PolarPoint(arg1, arg2);
-    		mprintf("PSETI");
-    		setInput(point, point2);
+    		point2 = getOther(point);
     	}
         else 
         {
-        	mprintf("NEI");
         	point = getInput();
-        	mpoint2 = getInput();
+        	point2 = getInput();
         }
     }
     catch(Exception e)
@@ -81,7 +73,7 @@ public class PointCPTest
       try
       {
         point = getInput();
-        setInput(point, point2);
+        point2 = getOther(point);
       }
       catch(IOException ex)
       {
@@ -184,12 +176,12 @@ public class PointCPTest
     	return (new PolarPoint(a, b));
   }
   
-  private static void setInput(AbstractPoint point, AbstractPoint point2)
+  private static AbstractPoint getOther(AbstractPoint point)
   {
 	  if (point.getType() == AbstractPoint.CARTESIAN)
-		  point2 = new PolarPoint(point.getRho(), point.getTheta());
+		  return new PolarPoint(point.getRho(), point.getTheta());
 	  else
-		  point2 = new CartesianPoint(point.getX(), point.getY());
+		  return new CartesianPoint(point.getX(), point.getY());
   }
   
 }
