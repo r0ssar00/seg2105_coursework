@@ -58,36 +58,14 @@ public abstract class AbstractPoint
 	}
 	
 	/**
-	* Converts Cartesian coordinates to Polar coordinates.
+	* No-Op as they are both stored in the Instances we do not need to convert
 	*/
-	public void convertStorageToPolar()
-	{
-		if(typeCoord != 'P')
-		{
-			//Calculate RHO and THETA
-			double temp = getRho();
-			yOrTheta = getTheta();
-			xOrRho = temp;
-	   
-			typeCoord = 'P';  //Change coord type identifier
-		}
-	}
+	public void convertStorageToPolar(){}
 		
 	/**
-	* Converts Polar coordinates to Cartesian coordinates.
+	* No-Op as they are both stored in the Instances we do not need to convert
 	*/
-	public void convertStorageToCartesian()
-	{
-		if(typeCoord != 'C')
-		{
-			//Calculate X and Y
-			double temp = getX();
-			yOrTheta = getY();
-			xOrRho = temp;
-
-			typeCoord = 'C';	//Change coord type identifier
-		}
-	}
+	public void convertStorageToCartesian(){}
 	
 	public abstract AbstractPoint rotatePoint(double rotation);
 	

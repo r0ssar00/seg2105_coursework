@@ -72,6 +72,10 @@ public class ComboPoint extends PointCP
 		}
 	}
 	
+	public void convertStorageToPolar() {}
+	
+	public void convertStorageToCartesian(){}
+	
 	public String toString()
 	{
 		return "As Polar " + getRho() + "," + getTheta() + "\n As Cartesian ["  + getX() + " , " + getY() + "]";
