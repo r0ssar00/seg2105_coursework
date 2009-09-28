@@ -1,7 +1,7 @@
 package design5;
 public class CartesianCoordinates extends AbstractPoint {
 	public CartesianCoordinates(double X, double Y) {
-		super(design3.AbstractPoint.CARTESIAN, X, Y);
+		super(design5.AbstractPoint.CARTESIAN, X, Y);
 	}
 	
 	public AbstractPoint rotatePoint(double rotation)

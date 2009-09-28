@@ -13,7 +13,7 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getX()
 	{
-		if (typeCoord==design3.AbstractPoint.CARTESIAN)
+		if (typeCoord==design4.AbstractPoint.CARTESIAN)
 		{
 			return super.getX();
 		} else
@@ -24,7 +24,7 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getY()
 	{
-		if (typeCoord==design3.AbstractPoint.CARTESIAN)
+		if (typeCoord==design4.AbstractPoint.CARTESIAN)
 		{
 			return super.getY();
 		} else
@@ -35,7 +35,7 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getRho()
 	{
-		if (typeCoord==design3.AbstractPoint.POLAR)
+		if (typeCoord==design4.AbstractPoint.POLAR)
 		{
 			return super.getRho();
 		} else
@@ -46,7 +46,7 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getTheta()
 	{
-		if (typeCoord==design3.AbstractPoint.POLAR)
+		if (typeCoord==design4.AbstractPoint.POLAR)
 		{
 			return super.getTheta();
 		} else
@@ -57,7 +57,7 @@ public class ComboPoint extends AbstractPoint
 	
 	public AbstractPoint rotatePoint(double rotation)
 	{
-		if (typeCoord==design3.AbstractPoint.POLAR)
+		if (typeCoord==design4.AbstractPoint.POLAR)
 		{
 			return new PolarCoordinates(getRho(), ((getTheta()+rotation) % 360));
 		} else
