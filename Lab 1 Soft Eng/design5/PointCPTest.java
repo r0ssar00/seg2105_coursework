@@ -50,11 +50,10 @@ public class PointCPTest
         else if (arg0 == 'P')
         	point = new PolarPoint(arg1, arg2);
         else
-        	point = null;
+        	point = getInput();
     }
     catch(Exception e)
     {
-    	e.printStackTrace();
       // If we arrive here, it is because either there were no
       // command line arguments, or they were invalid
       if(args.length != 0)
