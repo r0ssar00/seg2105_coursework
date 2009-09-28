@@ -6,6 +6,9 @@ public class CartesianPoint extends AbstractPoint
 		super('C', X, Y);
 	}
 	
+	public void convertStorageToPolar() {}
+	public void convertStorageToCartesian() {}
+	
 	public AbstractPoint rotatePoint(double rotation)
 	{
 		double radRotation = Math.toRadians(rotation);

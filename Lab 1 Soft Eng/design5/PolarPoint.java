@@ -6,6 +6,9 @@ public class PolarPoint extends AbstractPoint
 		super('P', Rho, Theta);
 	}
 	
+	public void convertStorageToPolar() {}
+	public void convertStorageToCartesian() {}
+	
 	public AbstractPoint rotatePoint(double rotation)
 	{
 		return new PolarPoint(xOrRho, ((yOrTheta+rotation) % 360));
