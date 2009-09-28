@@ -1,9 +1,10 @@
 package design4;
-public class ComboPoint extends AbstractPoint
+
+public class ComboPoint extends PointCP
 {
-	int typeCoord;
+	char typeCoord;
 	double xOrRho, yOrTheta;
-	public ComboPoint(int typeCoord, double xOrRho, double yOrTheta)
+	public ComboPoint(char typeCoord, double xOrRho, double yOrTheta)
 	{
 		super(typeCoord, xOrRho, yOrTheta);
 		this.xOrRho = xOrRho;
@@ -13,10 +14,11 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getX()
 	{
-		if (typeCoord==design4.AbstractPoint.CARTESIAN)
+		if (typeCoord=='P')
 		{
 			return super.getX();
-		} else
+		} 
+		else
 		{
 			return xOrRho;
 		}
@@ -24,10 +26,11 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getY()
 	{
-		if (typeCoord==design4.AbstractPoint.CARTESIAN)
+		if (typeCoord=='C')
 		{
 			return super.getY();
-		} else
+		} 
+		else
 		{
 			return yOrTheta;
 		}
@@ -35,10 +38,11 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getRho()
 	{
-		if (typeCoord==design4.AbstractPoint.POLAR)
+		if (typeCoord=='P')
 		{
 			return super.getRho();
-		} else
+		} 
+		else
 		{
 			return xOrRho;
 		}
@@ -46,23 +50,25 @@ public class ComboPoint extends AbstractPoint
 	
 	public double getTheta()
 	{
-		if (typeCoord==design4.AbstractPoint.POLAR)
+		if (typeCoord=='C')
 		{
 			return super.getTheta();
-		} else
+		} 
+		else
 		{
 			return yOrTheta;
 		}
 	}
 	
-	public AbstractPoint rotatePoint(double rotation)
+	public PointCP rotatePoint(double rotation)
 	{
-		if (typeCoord==design4.AbstractPoint.POLAR)
+		if (typeCoord=='P')
 		{
-			return new PolarCoordinates(getRho(), ((getTheta()+rotation) % 360));
-		} else
+			return new PointCP(typeCoord, getRho(), ((getTheta()+rotation) % 360));
+		} 
+		else
 		{
-			return new CartesianCoordinates(getX(), getY()).rotatePoint(rotation);
+			return new PointCP(typeCoord, getX(), getY()).rotatePoint(rotation);
 		}
 	}
 	
