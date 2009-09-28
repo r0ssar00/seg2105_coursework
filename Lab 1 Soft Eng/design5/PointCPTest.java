@@ -49,16 +49,16 @@ public class PointCPTest
     	if (arg0 == 0)
     	{
     		point = new CartesianPoint(arg1, arg2);
-    		point2 = new PolarPoint(point.getRho(), point.getTheta());
+    		setInput(point, point2);
     	}
     	else if (arg0 == 1)
     	{
         	point = new PolarPoint(arg1, arg2);
-        	point2 = new CartesianPoint(point.getX(), point.getY());
+    		setInput(point, point2);
     	}
         else
         	point = getInput();
-    		setInput(point, point2);
+        	point2 = getInput();
     }
     catch(Exception e)
     {
@@ -173,13 +173,12 @@ public class PointCPTest
     else
     	return (new PolarPoint(a, b));
   }
-  private static AbstractPoint setInput(AbstractPoint point, AbstractPoint point2) throws IOException
+  private static void setInput(AbstractPoint point, AbstractPoint point2)
   {
-	  if (point.typeCoord == 0)
+	  if (point.typeCoord == AbstractPoint.CARTESIAN)
 		  point2 = new PolarPoint(point.getRho(), point.getTheta());
 	  else
 		  point2 = new CartesianPoint(point.getX(), point.getY());
-	  return point2;
   }
   
 }
