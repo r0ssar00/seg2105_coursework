@@ -56,7 +56,7 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-    clientUI.display(msg.toString());
+    clientUI.display(msg);
   }
 
   /**
@@ -64,7 +64,7 @@ public class ChatClient extends AbstractClient
    *
    * @param message The message from the UI.    
    */
-  public void handleMessageFromClientUI(String message)
+  public void handleMessageFromClientUI(Object message)
   {
     try
     {

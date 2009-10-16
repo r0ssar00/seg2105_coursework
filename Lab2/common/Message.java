@@ -1,5 +1,5 @@
 package common;
-class Message {
+public class Message implements java.io.Serializable{
   public String user;
   public String message;
   public Message()
@@ -19,6 +19,6 @@ class Message {
   }
   public String toString()
   {
-    return user!=""?user + ": " + message:message;
+    return user!=""?user + "> " + message:message;
   }
 }

@@ -1,6 +1,7 @@
 package server;
 import java.io.*;
 import ocsf.server.*;
+import common.Message;
 
 
 public class CommandServer extends AbstractServer {
@@ -19,23 +20,23 @@ public class CommandServer extends AbstractServer {
   public void handleMessageFromClient
     (Object msg, ConnectionToClient client)
   {
-    System.out.println("Message received: " + msg + " from " + client);
+    System.out.println("Message received: " + (Message)msg + " from " + client);
     this.sendToAllClients(msg);
   }
   /**
    * This method handles any messages received from the server
    * @param message The message to send
    */
-    public void handleMessageFromServerUI(String message)
+    public void handleMessageFromServerUI(Object message)
   {
     String parsed = "";
-    if (!message.startsWith("#") && getNumberOfClients() > 0)
+    if (!((Message)message).message.startsWith("#") && getNumberOfClients() > 0)
     {
       this.sendToAllClients("SERVER MSG> " + message);
       return;
     } 
     {
-      parsed = message.substring(1);
+      parsed = ((Message)message).message.substring(1);
       if (parsed.equals("quit"))
       {
         try

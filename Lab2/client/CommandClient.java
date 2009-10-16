@@ -20,16 +20,16 @@ public class CommandClient extends ChatClient {
     exception.printStackTrace();
     System.exit(1);
   }
-  public void handleMessageFromClientUI(String message)
+  public void handleMessageFromClientUI(Object message)
   {
     String parsed = "";
-    if (!message.startsWith("#") && isConnected())
+    if (!((Message)message).message.startsWith("#") && isConnected())
     {
       super.handleMessageFromClientUI(message);
       return;
     } 
     {
-      parsed = message.substring(1);
+      parsed = ((Message)message).message.substring(1);
       if (parsed.equals("quit"))
       {
         try

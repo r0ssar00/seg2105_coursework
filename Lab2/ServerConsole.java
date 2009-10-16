@@ -82,7 +82,7 @@ public class ServerConsole implements ChatIF
       while (true) 
       {
         message = fromConsole.readLine();
-        server.handleMessageFromServerUI(message);
+        server.handleMessageFromServerUI(new Message("server",message));
       }
     } 
     catch (Exception ex) 
@@ -100,7 +100,7 @@ public class ServerConsole implements ChatIF
    */
   public void display(String message) 
   {
-    System.out.println("> " + message);
+    System.out.println(message);
   }
 
   

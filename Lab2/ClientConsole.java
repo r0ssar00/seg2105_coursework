@@ -31,6 +31,7 @@ public class ClientConsole implements ChatIF
    * The instance of the client that created this ConsoleChat.
    */
   CommandClient client;
+  String username = "";
 
   
   //Constructors ****************************************************
@@ -68,11 +69,10 @@ public class ClientConsole implements ChatIF
       BufferedReader fromConsole = 
         new BufferedReader(new InputStreamReader(System.in));
       String message;
-
       while (true) 
       {
         message = fromConsole.readLine();
-        client.handleMessageFromClientUI(message);
+        client.handleMessageFromClientUI(new Message(username,message));
       }
     } 
     catch (Exception ex) 
@@ -88,9 +88,9 @@ public class ClientConsole implements ChatIF
    *
    * @param message The string to be displayed.
    */
-  public void display(String message) 
+  public void display(Object message) 
   {
-    System.out.println("> " + message);
+    System.out.println((Message)message);
   }
 
   

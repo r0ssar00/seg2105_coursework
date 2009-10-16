@@ -1,7 +1,7 @@
 package server;
 import java.io.*;
 import ocsf.server.*;
-
+import common.Message;
 
 public class MessageServer extends AbstractServer {
   //Class variables *************************************************
@@ -25,7 +25,7 @@ public class MessageServer extends AbstractServer {
   public void handleMessageFromClient
     (Object msg, ConnectionToClient client)
   {
-    System.out.println("Message received: " + msg + " from " + client);
+    System.out.println("Message received: " + (Message)msg + " from " + client);
     this.sendToAllClients(msg);
   }
     
