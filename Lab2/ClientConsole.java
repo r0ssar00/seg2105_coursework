@@ -30,7 +30,7 @@ public class ClientConsole implements ChatIF
   /**
    * The instance of the client that created this ConsoleChat.
    */
-  ChatClient client;
+  ClosingClient client;
 
   
   //Constructors ****************************************************
@@ -45,7 +45,7 @@ public class ClientConsole implements ChatIF
   {
     try 
     {
-      client= new ChatClient(host, port, this);
+      client= new ClosingClient(host, port, this);
     } 
     catch(IOException exception) 
     {
