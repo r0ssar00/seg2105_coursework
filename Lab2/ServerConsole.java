@@ -3,8 +3,8 @@
 // license found at www.lloseng.com 
 
 import java.io.*;
-import client.*;
 import common.*;
+import server.*;
 
 /**
  * This class constructs the UI for a chat client.  It implements the
@@ -16,41 +16,51 @@ import common.*;
  * @author Dr Robert Lagani&egrave;re
  * @version July 2000
  */
-public class ClientConsole implements ChatIF 
+public class ServerConsole implements ChatIF
 {
-  //Class variables *************************************************
+  //Class variables ************************************************
   
-  /**
-   * The default port to connect on.
-   */
   final public static int DEFAULT_PORT = 5555;
   
   //Instance variables **********************************************
   
   /**
-   * The instance of the client that created this ConsoleChat.
+   * The instance of the server
    */
-  CommandClient client;
+  CommandServer server;
 
   
   //Constructors ****************************************************
-
+  public ServerConsole()
+  {
+    try
+    {
+      server= new CommandServer(DEFAULT_PORT);
+      server.listen();
+    }
+    catch(IOException exception)
+    {
+      System.out.println("Error: Can't setup connection!"
+                + " Terminating server.");
+      System.exit(1);
+    }
+  }
   /**
-   * Constructs an instance of the ClientConsole UI.
+   * Constructs an instance of the ServerConsole UI.
    *
-   * @param host The host to connect to.
    * @param port The port to connect on.
    */
-  public ClientConsole(String host, int port) 
+  public ServerConsole(int port) 
   {
     try 
     {
-      client= new CommandClient(host, port, this);
+      server= new CommandServer(port);
+      server.listen();
     } 
     catch(IOException exception) 
     {
       System.out.println("Error: Can't setup connection!"
-                + " Terminating client.");
+                + " Terminating server.");
       System.exit(1);
     }
   }
@@ -72,7 +82,7 @@ public class ClientConsole implements ChatIF
       while (true) 
       {
         message = fromConsole.readLine();
-        client.handleMessageFromClientUI(message);
+        server.handleMessageFromServerUI(message);
       }
     } 
     catch (Exception ex) 
@@ -97,38 +107,29 @@ public class ClientConsole implements ChatIF
   //Class methods ***************************************************
   
   /**
-   * This method is responsible for the creation of the Client UI.
+   * This method is responsible for the creation of the Server UI.
    *
    * @param args[0] The host to connect to.
    */
   public static void main(String[] args) 
   {
-    String host = "";
-    int port = 0;  //The port number
-
+  
+    ServerConsole server;
+      
     try
     {
-      host = args[0];
+      server = new ServerConsole(Integer.parseInt(args[0]));
     }
-    catch(ArrayIndexOutOfBoundsException e)
+    catch (NumberFormatException ex)
     {
-      host = "localhost";
+      System.out.println("Warning: argument is not a number, using " + DEFAULT_PORT);
+      server = new ServerConsole();
     }
-    try
+    catch (ArrayIndexOutOfBoundsException ex)
     {
-      port = Integer.parseInt(args[1]);
+      server = new ServerConsole();
     }
-    catch (NumberFormatException e)
-    {
-      System.out.println("Warning: Port argument is not a number, using " + DEFAULT_PORT);
-      port = DEFAULT_PORT;
-    }
-    catch (ArrayIndexOutOfBoundsException e)
-    {
-      port = DEFAULT_PORT;
-    }
-    ClientConsole chat= new ClientConsole(host, port);
-    chat.accept();  //Wait for console data
+    server.accept();  //Wait for console data
   }
 }
 //End of ConsoleChat class
