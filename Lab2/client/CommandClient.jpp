@@ -1,0 +1,205 @@
+/*
+  ChatClient only handles a basic connection and assumes it will never terminate.
+  This class handles connection closes.
+*/
+
+package client;
+import ocsf.client.*;
+import common.*;
+import java.io.*;
+
+public class CommandClient extends ChatClient {
+#ifdef E51  // change the declaration so that E51 works
+  private String username = "";
+  public CommandClient(String username, String host, int port, ChatIF clientUI) 
+#else       // use the declaration for non-username questions
+  public CommandClient(String host, int port, ChatIF clientUI)
+#endif
+    throws IOException 
+  {
+    super(host, port, clientUI); //Call the superclass constructor
+#ifdef E51  // username
+    this.username = username;
+#endif
+  }  
+  
+#if defined(E49)||defined(E50)||defined(E51)  // create the following two methods only if we're evaluating the assignment'
+  protected void connectionClosed()
+  {
+    System.out.println("Connection closed!");
+    super.connectionClosed();
+ #if !defined(E50)&&!defined(E51)      // only exit when in E49
+    System.exit(1);
+ #endif
+  }
+  protected void connectionException(Exception exception)
+  {
+    System.out.println("Connection exception: " + exception.getMessage());
+#if !defined(E50)&&!defined(E51)
+    System.exit(1);
+#endif
+  }
+#endif
+#ifdef E51    // this method only needed in E51
+  // this method is called immediately after the client connects.  it iniates login procedures automatically.
+  public void connectionEstablished()
+  {
+    super.handleMessageFromClientUI(new Message(username, "#login " + username));
+  }
+#endif
+#ifndef E49  // this method not needed in E49
+  // this method handles the command set available to the client
+#if defined(E50)||defined(E51)
+  // additionally, it also does some processing with the login information and
+  // handles the login command seperately from the rest
+#endif
+  public void handleMessageFromClientUI(Object message)
+  {
+    String parsed = "";
+ #ifdef E51  // username stuff
+    ((Message)message).user = username;
+ #endif
+ #ifdef E50  // handle the non-command message normally in E50
+    // handle a regular command
+    if (!((Message)message).message.startsWith("#") && isConnected())
+    {
+      super.handleMessageFromClientUI(message);
+      return;
+    }
+ #endif
+ #ifdef E51  // almost the same as E50 but we need to test for #login now
+    // hand the login command
+    if (((Message)message).message.startsWith("#login"))
+    {
+      if (!isConnected())
+        try
+        {
+          openConnection();
+        }
+        catch (IOException ex)
+        {
+          System.out.println("Error: " + ex.getMessage());
+          ex.printStackTrace();
+        }
+      if (((Message)message).message.split(" ").length == 1)
+      {
+        return;
+      } 
+      else
+      {
+        username = ((Message)message).message.split(" ")[1];
+      }
+      ((Message)message).user = username;
+      super.handleMessageFromClientUI(message);
+      return;
+    }
+    // handle a regular command
+    else if (!((Message)message).message.startsWith("#") && isConnected())
+    {
+      super.handleMessageFromClientUI(message);
+      return;
+    }
+ #endif
+    {
+      parsed = ((Message)message).message.substring(1);
+      if (parsed.equals("quit"))
+      {
+        try
+        {
+          closeConnection();
+        }
+        catch (IOException ex)
+        {
+          ex.printStackTrace();
+          System.exit(1);
+        }
+        System.exit(0);
+      }
+      else if (parsed.equals("logoff"))
+      {
+        try
+        {
+#ifdef E51
+          username = "";
+#endif
+          closeConnection();
+        }
+        catch (IOException ex)
+        {
+          ex.printStackTrace();
+          System.exit(1);
+        }
+      }
+  #ifndef E51 // E51 is special, we already handled it
+      else if (parsed.equals("login"))
+      {
+        if (isConnected())
+        {
+          System.out.println("Error: Already connected");
+          return;
+        }
+        try
+        {
+          openConnection();
+        }
+        catch (IOException ex)
+        {
+          System.out.println("Error: " + ex.getMessage());
+          ex.printStackTrace();
+        }
+      }
+  #endif
+      else if (parsed.startsWith("sethost"))
+      {
+        if (isConnected())
+        {
+          System.out.println("Error: Already connected");
+          return;
+        } 
+        else
+        {
+          String host = "";
+          try 
+          {
+            host = parsed.split(" ")[1];
+          }
+          catch (ArrayIndexOutOfBoundsException ex)
+          {
+            System.out.println("Error: Must specify host");
+            return;
+          }
+          setHost(host);
+        }
+      }
+      else if (parsed.startsWith("setport"))
+      {
+        if (isConnected())
+        {
+          System.out.println("Error: Already connected");
+          return;
+        } 
+          int port = 0;
+          try 
+          {
+            port = Integer.parseInt(parsed.split(" ")[1]);
+          }
+          catch (ArrayIndexOutOfBoundsException ex)
+          {
+            System.out.println("Error: Must specify port");
+            return;
+          }
+          setPort(port);
+      }
+      else if (parsed.equals("getport"))
+      {
+        System.out.println("Port: " + getPort());
+      }
+      else if (parsed.equals("gethost"))
+      {
+        System.out.println("Host: " + getHost());
+      }
+      
+    }
+  }
+#endif
+}

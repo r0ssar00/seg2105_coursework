@@ -1,0 +1,182 @@
+package server;
+import java.io.*;
+import ocsf.server.*;
+import common.Message;
+
+
+public class CommandServer extends AbstractServer {
+  //Constructors ************************************************
+  public CommandServer(int port)
+  {
+    super(port);
+  }
+  //Instance methods ************************************************
+  // this method passes messages between clients
+#ifdef E51
+  // additionally, it handles (re-)logging in
+#endif
+  public void handleMessageFromClient
+    (Object message, ConnectionToClient client)
+  {
+    System.out.println((Message)message + " (from " + client + ")");
+#ifdef E51 // get username stuff
+    boolean isinitial = (Boolean)client.getInfo("isinitial");
+    if (isinitial)
+    {
+      if (!((Message)message).message.startsWith("#login")) // they haven't actually sent a login command
+      {
+        try
+        {
+          System.out.println("Warning: User tried to chat without a username");
+          client.sendToClient(new Message("SERVER MSG", "Error: you haven't logged in'"));
+          client.close();
+          return;
+        }
+        catch (IOException e)
+        {
+          // this shouldn't happen
+        }
+      }
+      if (((Message)message).message.equals("#login ") || ((Message)message).message.equals("#login")) // they've sent a login command without arguments
+      {
+        try
+        {
+          System.out.println("Warning: User tried to chat with a blank username");
+          client.sendToClient(new Message("SERVER MSG", "Error: you didn't pass a username"));
+          client.close();
+          return;
+        }
+        catch (IOException e)
+        {
+          // this shouldn't happen
+        }
+      }
+      // message should contain #login somename at this point. username is actually stored in message.user.
+      client.setInfo("username", ((Message)message).user);
+      client.setInfo("isinitial", Boolean.FALSE);
+      return;
+    }
+    ((Message)message).user = (String)client.getInfo("username");
+    if (!((Message)message).message.contains("#login"))
+#endif
+      this.sendToAllClients(message);
+  }
+#ifdef E51
+  // this method sets the isinitial property of the connection, the only way to tell if
+  // a connection is new or not and whether we should handle login
+  public void clientConnected(ConnectionToClient client)
+  {
+    client.setInfo("isinitial", Boolean.TRUE);
+  }
+#endif
+#ifndef E49 // hide this if we're running E49
+#if defined(E50)||defined(E51)  // show this if we're running E50 or E51
+  /**
+   * This method handles any messages received from the server and performs commands
+   * @param message The message to send
+   */
+    public void handleMessageFromServerUI(Object message)
+  {
+    String parsed = "";
+    if (!((Message)message).message.startsWith("#") && getNumberOfClients() > 0)
+    {
+      ((Message)message).user="SERVER MSG";
+      this.sendToAllClients(message);
+    } 
+    {
+      parsed = ((Message)message).message.substring(1);
+      if (parsed.equals("quit"))
+      {
+        try
+        {
+          close();
+          System.exit(0);
+        }
+        catch (IOException ex)
+        {
+          ex.printStackTrace();
+          System.exit(1);
+        }
+        System.exit(0);
+      }
+      else if (parsed.equals("stop"))
+      {
+        stopListening();
+      }
+      else if (parsed.equals("close"))
+      {
+        try
+        {
+          close();
+        }
+        catch (IOException ex)
+        {
+          System.out.println("Error: " + ex.getMessage());
+          ex.printStackTrace();
+        }
+      }
+      else if (parsed.equals("start"))
+      {
+        if (isListening())
+        {
+          System.out.println("Error: already listening");
+          return;
+        }
+        try
+        {
+          listen();
+        }
+        catch (IOException ex)
+        {
+          System.out.println("Error: " + ex.getMessage());
+          ex.printStackTrace();
+        }
+      }
+      else if (parsed.startsWith("setport"))
+      {
+        if (isListening())
+        {
+          System.out.println("Error: Already listening");
+          return;
+        } 
+          int port = 0;
+          try 
+          {
+            port = Integer.parseInt(parsed.split(" ")[1]);
+          }
+          catch (ArrayIndexOutOfBoundsException ex)
+          {
+            System.out.println("Error: Must specify port");
+            return;
+          }
+          setPort(port);
+      }
+      else if (parsed.equals("getport"))
+      {
+        System.out.println("Port: " + getPort());
+      }
+      
+    }
+  }
+ #endif
+#endif
+  /**
+   * This method overrides the one in the superclass.  Called
+   * when the server starts listening for connections.
+   */
+  protected void serverStarted()
+  {
+    System.out.println
+      ("Server listening for connections on port " + getPort());
+  }
+  
+  /**
+   * This method overrides the one in the superclass.  Called
+   * when the server stops listening for connections.
+   */
+  protected void serverStopped()
+  {
+    System.out.println
+      ("Server has stopped listening for connections.");
+  }
+}

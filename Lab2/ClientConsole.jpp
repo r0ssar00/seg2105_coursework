@@ -1,0 +1,179 @@
+// This file contains material supporting section 3.7 of the textbook:
+// "Object Oriented Software Engineering" and is issued under the open-source
+// license found at www.lloseng.com 
+
+import java.io.*;
+import client.*;
+import common.*;
+
+/**
+ * This class constructs the UI for a chat client.  It implements the
+ * chat interface in order to activate the display() method.
+ * Warning: Some of the code here is cloned in ServerConsole 
+ *
+ * @author Fran&ccedil;ois B&eacute;langer
+ * @author Dr Timothy C. Lethbridge  
+ * @author Dr Robert Lagani&egrave;re
+ * @version July 2000
+ */
+public class ClientConsole implements ChatIF 
+{
+  //Class variables *************************************************
+  
+  /**
+   * The default port to connect on.
+   */
+  final public static int DEFAULT_PORT = 5555;
+  
+  //Instance variables **********************************************
+  
+  /**
+   * The instance of the client that created this ConsoleChat.
+   */
+  CommandClient client;
+
+  
+  //Constructors ****************************************************
+
+#ifdef E51
+  /**
+   * Constructs an instance of the ClientConsole UI.
+   *
+   * @param host The host to connect to.
+   * @param port The port to connect on.
+   * #param username The username to connect with
+   */
+#else
+  /**
+   * Constructs an instance of the ClientConsole UI.
+   *
+   * @param host The host to connect to.
+   * @param port The port to connect on.
+   */
+#endif
+
+#ifdef E51  // mod the constructor for username
+  public ClientConsole(String username, String host, int port) 
+#else
+  public ClientConsole(String host, int port)
+#endif
+  {
+    try 
+    {
+#ifdef E51  // same as above
+      client= new CommandClient(username, host, port, this);
+#else
+      client= new CommandClient(host, port, this);
+#endif
+    } 
+    catch(IOException exception) 
+    {
+      System.out.println("Error: Can't setup connection!"
+                + " Terminating client.");
+      System.exit(1);
+    }
+  }
+
+  
+  //Instance methods ************************************************
+  /**
+   * This method waits for input from the console.  Once it is 
+   * received, it sends it to the client's message handler.
+   */
+  public void accept() 
+  {
+    try
+    {
+      BufferedReader fromConsole = 
+        new BufferedReader(new InputStreamReader(System.in));
+      String message;
+      while (true) 
+      {
+        message = fromConsole.readLine();
+        client.handleMessageFromClientUI(new Message(message));
+      }
+    } 
+    catch (Exception ex) 
+    {
+      System.out.println
+        ("Unexpected error while reading from console!");
+    }
+  }
+
+  /**
+   * This method overrides the method in the ChatIF interface.  It
+   * displays a message onto the screen.
+   *
+   * @param message The string to be displayed.
+   */
+  public void display(Object message) 
+  {
+    System.out.println((Message)message);
+  }
+
+  
+  //Class methods ***************************************************
+  
+  /**
+   * This method is responsible for the creation of the Client UI.
+   *
+   * @param args[0] The host to connect to.
+   */
+  public static void main(String[] args) 
+  {
+    String host = "";
+    int port = 0;  //The port number
+#ifdef E51  // increment the arguments when dealing with E51
+  #define HOSTARG 1
+  #define PORTARG 2
+#else
+  #define HOSTARG 0
+  #define PORTARG 1
+#endif
+    
+#ifdef E51  // get the username for E51
+    String user = "";
+    try
+    {
+      user = args[0];
+    }
+    catch(ArrayIndexOutOfBoundsException e)
+    {
+      System.out.println("Error: no userid provided, quitting...");
+      System.exit(2);
+    }
+#endif
+    try
+    {
+      host = args[HOSTARG];
+    }
+    catch(ArrayIndexOutOfBoundsException e)
+    {
+      host = "localhost";
+    }
+#if defined(E49)||defined(E50)||defined(E51) // get the port number
+    try
+    {
+      port = Integer.parseInt(args[PORTARG]);
+    }
+    catch (NumberFormatException e)
+    {
+      System.out.println("Warning: Port argument is not a number, using " + DEFAULT_PORT);
+      port = DEFAULT_PORT;
+    }
+    catch (ArrayIndexOutOfBoundsException e)
+    {
+      port = DEFAULT_PORT;
+    }
+#else
+    port = DEFAULT_PORT;
+#endif
+#ifdef E51 // use the username
+    ClientConsole chat= new ClientConsole(user, host, port);
+#else
+    ClientConsole chat= new ClientConsole(host, port);
+#endif
+    chat.accept();  //Wait for console data
+  }
+}
+//End of ConsoleChat class
